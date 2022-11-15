@@ -8,7 +8,19 @@ export default class ImageGenerator extends Component {
   generateImage = async () => {
     //Generate the image HERE
     console.log('Generate an image');
+
+    //Get request to the route /random, the response is a json which contains an image src. 
+    // I could also get the status code in the response and add an if statement for more validation.
+    axios.get('http://localhost:8001/random')
+      .then(function (response) {
+        document.getElementById('imgContainer').src = response.data.message;
+        document.getElementById('imgContainer').classList.remove("hidden");
+      })
+      .catch(function (error) {
+        return error;
+      });
   };
+
   render() {
     return (
       <div className='container'>
